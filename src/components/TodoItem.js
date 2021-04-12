@@ -1,19 +1,14 @@
-import { useState } from 'react';
-function TodoItem({ item }) {
-  const [state, setState] = useState({
-    isChecked: false,
-  });
+import React from "react";
 
-  function toggleCheck() {
-    setState({ isChecked: !state.isChecked });
-    console.log(state.isChecked);
-  }
+function TodoItem({ item, onCheck }) {
+  const handleChange = () => {
+    onCheck(item);
+  };
+
   return (
     <label className="panel-block">
-      <input type="checkbox" onChange={toggleCheck} />
-      <div className={state.isChecked ? "has-text-grey-light" : ""}>
-        {item.text}
-      </div>
+      <input type="checkbox" onChange={handleChange} checked={item.done} />
+      <div className={item.done ? "has-text-grey-light" : ""}>{item.text}</div>
     </label>
   );
 }
